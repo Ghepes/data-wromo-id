@@ -67,7 +67,7 @@ id entered at the beginning of each change in that row
 
 ## install npmpacket 
 ````
-and npm data-wromo-id
+npm i data-wromo-id
 ````
 ## For Dynamic Static CDN - script:
 ````
