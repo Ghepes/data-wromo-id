@@ -1,0 +1,20 @@
+{
+  "name": "data-wromo-id",
+  "version": "1.0.0",
+  "description": "A universal data id widget for npm packages or with CDN integration.",
+  "main": "index.js",
+  "unpkg": "data-wromo-id.js",
+  "jsdelivr": "data-wromo-id.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ghepes/data-wromo-id.git"
+  },
+  "keywords": [
+    "id",
+    "data",
+    "widget",
+    "cdn"
+  ],
+  "author": "Ghepes",
+  "license": "MIT"
+}
