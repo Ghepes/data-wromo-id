@@ -6,7 +6,7 @@ Data wromo ID is Loader component for any website id dynamically for any page, t
 
 create json file according to id data_wromo_id
 maps json should look like the following example
-To da /data/ folder
+FOLDER -> /data/... 
 
 ## IMPORTANT:
 The /data/ folder is the only folder that is recognized by the json id import: The logic is according to the page name or url: If it is main domain or index.html, the id data is expected to be in
