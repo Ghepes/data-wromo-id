@@ -1,8 +1,9 @@
 /**
- * Wromo Data Loader v2.3 (Dynamic Domain & Anti-Flash) by Wromo Team
+ * Wromo Data Loader local version v2.3 (Dynamic Domain & Anti-Flash) by Wromo Team
  * Signed by Iulian Ghepes (https://iulian.ghepes.com)
  * This script is responsible for dynamically loading data into the page based on a JSON file specific to each page.
- * Features v2.3 License: MIT
+ * Features v1.0.1 License: MIT
+ * Official Repository: https://github.com/Ghepes/data-wromo-id   v1.0.1
  */
 
     // --- 0. ANTI-FLASH SETUP (Imediat) ---

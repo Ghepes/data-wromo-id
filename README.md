@@ -71,12 +71,20 @@ npm i data-wromo-id
 ````
 ## For Dynamic Static CDN - script:
 ````
-<script type="module" src="https://cdn.jsdelivr.net/npm/data-wromo-id@1.0.0/data-wromo-id.js" data-url="/data/"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/data-wromo-id@1.0.1/data-wromo-id.js" data-url="/data/"></script>
 </body>
 ````
+## webpage raw
+data_wromo_id="YOUR_RAW_ID"
 
-<script src="https://cdn.jsdelivr.net/npm/search-dinamic-sheet-wromo@1.0.0/sheet-search-wromo.js" defer></script>
+## Json 
+{
+      "id": "YOUR_RAW_ID", "content": "XYZ", "type": "text"
+    }
 
+## Your Folder json
+
+/data/NAME_structure.json
 
 ---
 
