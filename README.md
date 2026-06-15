@@ -1,6 +1,10 @@
 # data-wromo-id
 Data wromo ID is Loader component for any website id dynamically for any page, text, images, url understands any desired variant with your own json
 
+## v1.0.2
+Visual fix integration for <a> tags
+FIX Removing hardcoding domain Origin in video iframe url API 
+
 
 ## Follow the next steps
 
@@ -13,9 +17,15 @@ The /data/ folder is the only folder that is recognized by the json id import: T
 
 /data/index_structure.json
 
-On the blog page or blog.html it is --> /data/blog_structure.json
-and so on /data/NAME_structure.json
+On the blog page or blog.html it is 
 
+--> /data/blog_structure.json
+
+and so on :
+
+/data/NAME_structure.json
+
+JSON
 ````
 {
   "metadata": {
@@ -71,7 +81,7 @@ npm i data-wromo-id
 ````
 ## For Dynamic Static CDN - script:
 ````
-<script type="module" src="https://cdn.jsdelivr.net/npm/data-wromo-id@1.0.1/data-wromo-id.js" data-url="/data/"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/data-wromo-id@1.0.2/data-wromo-id.js" data-url="/data/"></script>
 </body>
 ````
 ## webpage raw

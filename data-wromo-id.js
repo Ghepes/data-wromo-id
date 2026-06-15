@@ -1,9 +1,9 @@
 /**
- * Wromo Data Loader local version v2.3 (Dynamic Domain & Anti-Flash) by Wromo Team
+ * Wromo Data Loader local version v4.0.0 (Dynamic Domain & Anti-Flash) by Wromo Team
  * Signed by Iulian Ghepes (https://iulian.ghepes.com)
  * This script is responsible for dynamically loading data into the page based on a JSON file specific to each page.
- * Features v1.0.1 License: MIT
- * Official Repository: https://github.com/Ghepes/data-wromo-id   v1.0.1
+ * Features v1.0.2 License: MIT
+ * Official Repository: https://github.com/Ghepes/data-wromo-id   v1.0.2
  */
 
     // --- 0. ANTI-FLASH SETUP (Imediat) ---
@@ -34,10 +34,8 @@
                 this.config.baseDataUrl = overrideUrl;
             }
 
-            // 1. Detecting the name of the current page / subdirectory
+            // 1. Detecting intelligence the name of the current page / subdirectory
             let path = window.location.pathname;
-            
-            // We remove the .html extension if it exists (ex: "/blog/index.html" becomes "/blog/index")
             path = path.replace('.html', '');
             
             if (path.endsWith('/') && path.length > 1) {
@@ -51,8 +49,6 @@
             
             if (segments.length > 0) {
                 let lastSegment = segments[segments.length - 1];
-                
-                // case: if it's "index" in a subdirectory (ex: /blog/index), the real name is the parent folder ("blog")
                 if (lastSegment === 'index' && segments.length > 1) {
                     pageName = segments[segments.length - 2];
                 } else {
@@ -64,7 +60,6 @@
             const jsonFileName = `${pageName}_structure.json`;
             const fullUrl = this.config.baseDataUrl + jsonFileName;
 
-            // console.log (`WromoLoader: Fetching data from ${fullUrl}`);
             this.load(fullUrl);
         },
 
@@ -78,7 +73,7 @@
 
                 const data = await response.json();
                 
-                // We wait for the DOM to be ready before applying the data. This ensures that all elements are present before we try to manipulate them.
+                // We wait for the DOM to be ready before applying the data. This ensures that all elements are present before we try.
                 if (document.readyState === 'loading') {
                     document.addEventListener('DOMContentLoaded', () => this.applyData(data));
                 } else {
@@ -104,13 +99,13 @@
 
             const items = Array.isArray(itemsRaw) ? itemsRaw : [itemsRaw];
 
-            // Quick access mapping of id -> data for faster lookups
+            // Quick access mapping of id data for faster lookups
             const dataMap = new Map();
             items.forEach(item => {
                 if (item.id) dataMap.set(item.id, item);
             });
 
-            // We select the elements on the page that have the data_wromo_id attribute and apply the corresponding data from the JSON. This is done in a single pass for efficiency.
+            // We select the elements on the page that have the data_wromo_id attribute and apply the corresponding data from the JSON.
             const elements = document.querySelectorAll(`[${this.config.attributeName}]`);
 
             elements.forEach(element => {
@@ -132,7 +127,7 @@
                         if (itemData.href) element.href = itemData.href;
                         if (itemData.url) element.href = itemData.url;
                     }
-                    // IFRAMES
+                    // IFRAMES FIX: Automatic domain replacement without hardcoding
                     else if (element.tagName === 'IFRAME') {
                         let currentSrc = element.getAttribute('src');
                         if (currentSrc) {
@@ -140,9 +135,18 @@
                             if (itemData.videoId) {
                                 currentSrc = currentSrc.replace(/\/embed\/([A-Za-z0-9_-]+)/, `/embed/${itemData.videoId}`);
                             }
-                            // 2. change the domain "domain.com" wherever it appears in the URL (plain or encoded)
+                            // 2. change the domain Automatic domain replacement at end of url youtube
                             if (itemData.domain) {
-                                currentSrc = currentSrc.replaceAll('ghepes.com', itemData.domain);
+                                try {
+                                    // Folosim API-ul URL pentru a parsa linkul iframe-ului
+                                    let urlObj = new URL(currentSrc, window.location.origin);
+                                    // Inlocuim strict hostname-ul (domeniul)
+                                    urlObj.searchParams.set('origin', window.location.origin);
+                                    // Reconstruim linkul
+                                    currentSrc = urlObj.href;
+                                } catch(e) {
+                                    console.warn("WromoLoader: URL IFRAME invalid", currentSrc);
+                                }
                             }
                             element.setAttribute('src', currentSrc);
                         }
